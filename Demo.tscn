@@ -1,0 +1,94 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://addons/ObfuscatedTileMap/obfuscated_tilemap.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Player.gd" type="Script" id=3]
+[ext_resource path="res://demo_tileset.png" type="Texture" id=4]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="TileSet" id=3]
+0/name = "demo_tileset.png 0"
+0/texture = ExtResource( 4 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 1 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+1/name = "demo_tileset.png 1"
+1/texture = ExtResource( 4 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 16, 0, 16, 16 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape = SubResource( 2 )
+1/shape_one_way = false
+1/shape_one_way_margin = 1.0
+1/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+1/z_index = 0
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 40.0
+
+[node name="Demo" type="Node2D"]
+
+[node name="ObfuscatedTileMap" type="TileMap" parent="."]
+tile_set = SubResource( 3 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 65542, 0, 0, 65544, 0, 0, 131077, 0, 0, 131078, 0, 0, 131083, 0, 0, 131084, 0, 0, 131085, 0, 0, 196613, 0, 0, 196614, 0, 0, 196616, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 262149, 0, 0, 262150, 0, 0, 262152, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 327685, 0, 0, 327686, 0, 0, 327688, 0, 0, 393222, 0, 0, 393224, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0 )
+script = ExtResource( 1 )
+obfuscation_tile_id = 1
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 153.059, 103.087 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Collision" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="Player"]
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 2 )
+
+[node name="VisibilityRange" type="Area2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/VisibilityRange"]
+position = Vector2( -1, 1 )
+shape = SubResource( 5 )
+
+[connection signal="visibility_range_changed" from="Player" to="ObfuscatedTileMap" method="add_update_visibility_range"]

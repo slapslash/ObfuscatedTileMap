@@ -2,10 +2,9 @@
 An Addon for Godot, that uses a special way of handling visibility on tilemaps.  
 Visibility ranges (Area2D) can be added to players or static objects. Within those ranges, only interconnected tiles will be shown. Enclosed areas or areas behind walls will be hidden. Somehow it works a bit like global illumination, where your visibility spreads, maybe even around corners, until it gets blocked.  
 
-![](setup1.png "setup1")
-![](result1.PNG "result1")
-![](setup2.png "setup2")
-![](result2.png "result2")
+![](demo1.png "demo1")
+![](demo2.png "demo2")
+
 
 ## Project Status
 This project is in a very early stage and not very user friendly. Some TODOs are mentioned in the code, setup variables are still hidden in the code and other issues are even noticable in the example images above.
